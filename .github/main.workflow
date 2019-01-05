@@ -3,8 +3,14 @@ workflow "Lint and Test" {
   resolves = ["Run Unit Tests"]
 }
 
+action "Install Dependencies" {
+  uses = "actions/npm@e7aaefe"
+  runs = "npm i -D"
+}
+
 action "Lint Code" {
   uses = "actions/npm@e7aaefe"
+  needs = ["Install Dependencies"]
   runs = "npm run lint"
 }
 

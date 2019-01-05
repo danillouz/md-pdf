@@ -3,12 +3,16 @@
 const showdown = require('showdown');
 const puppeteer = require('puppeteer');
 
-async function main() {
-  const converter = new showdown.Converter();
-  const text = '# Hello Markdown!\n\nThis is some text.';
-  const html = converter.makeHtml(text);
+const md = require('./md');
 
-  console.log(html);
+const log = console.log.bind(console);
+
+async function main() {
+  const mdConverter = new showdown.Converter();
+  const mdText = '# Hello Markdown!\n\nThis is some texxxt.';
+  const html = await md.makeHTML(mdConverter, mdText);
+
+  log(html);
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -25,4 +29,4 @@ async function main() {
   await browser.close();
 }
 
-main();
+main().catch(log);

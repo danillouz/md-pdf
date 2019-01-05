@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/danillouz/md-pdf#readme",
   "devDependencies": {
-    "@danillouz/eslint-config-nodejs": "^1.4.1",
+    "@danillouz/eslint-config-nodejs": "^1.5.0",
     "eslint": "^5.12.0",
     "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-prettier": "^3.0.1",

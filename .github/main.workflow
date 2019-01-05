@@ -5,7 +5,7 @@ workflow "Lint and Test" {
 
 action "Install Dependencies" {
   uses = "actions/npm@e7aaefe"
-  runs = "npm i -D"
+  runs = "npm ci"
 }
 
 action "Lint Code" {

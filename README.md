@@ -1,2 +1,3 @@
 # md-pdf
-Markdown to PDF
+
+Experimenting 🧪 with generating PDF files 📄 from Markdown text.

@@ -48,4 +48,4 @@ _This is **more** text._
 
 Generates the following PDF:
 
-![PDF Image Example](./example.pdf)
+![PDF Output Example](./example.pdf)

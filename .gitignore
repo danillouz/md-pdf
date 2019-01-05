@@ -62,3 +62,4 @@ typings/
 
 # PDFs
 *.pdf
+!example.pdf

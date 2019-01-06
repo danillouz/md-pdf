@@ -63,3 +63,6 @@ typings/
 # PDFs
 *.pdf
 !example.pdf
+
+# misc
+.DS_Store

@@ -2,7 +2,7 @@
 
 const headless = require('./headless');
 
-test('makePDF(service, html, filePath) throws without service', async () => {
+test('makePDF(service, html) throws without service', async () => {
   expect.assertions(1);
 
   const want = new Error(
@@ -16,13 +16,14 @@ test('makePDF(service, html, filePath) throws without service', async () => {
   }
 });
 
-test('makePDF(service, html, filePath) throws without html', async () => {
+test('makePDF(service, html) throws without html', async () => {
   expect.assertions(1);
 
-  const service = {};
   const want = new Error(
     'Provide some HTML. For example "<h1>Hello World!</h1>".'
   );
+
+  const service = {};
 
   try {
     await headless.makePDF(service);
@@ -31,24 +32,11 @@ test('makePDF(service, html, filePath) throws without html', async () => {
   }
 });
 
-test('makePDF(service, html, filePath) throws without filePath', async () => {
+test('makePDF(service, html) resolves with PDF Buffer', async () => {
   expect.assertions(1);
 
-  const service = {};
   const html = '<h1>Hello World!</h1>';
-  const want = new Error(
-    'Provide a file path to store the PDF. For example "file.pdf".'
-  );
-
-  try {
-    await headless.makePDF(service, html);
-  } catch (err) {
-    expect(err).toEqual(want);
-  }
-});
-
-test('makePDF(service, html, filePath) resolves', async () => {
-  expect.assertions(1);
+  const want = Buffer.from(html, 'base64');
 
   const service = {
     launch() {
@@ -56,7 +44,7 @@ test('makePDF(service, html, filePath) resolves', async () => {
         newPage() {
           return Promise.resolve({
             setContent: () => Promise.resolve(),
-            pdf: () => Promise.resolve()
+            pdf: () => Promise.resolve(want)
           });
         },
         close: () => Promise.resolve()
@@ -66,9 +54,7 @@ test('makePDF(service, html, filePath) resolves', async () => {
     }
   };
 
-  const html = '<h1>Hello World!</h1>';
-  const filePath = 'test.pdf';
-  const got = await headless.makePDF(service, html, filePath);
+  const got = await headless.makePDF(service, html);
 
-  expect(got).toEqual();
+  expect(got).toEqual(want);
 });

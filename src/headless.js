@@ -6,11 +6,10 @@ module.exports = {
    *
    * @param {Object} service - Headless browser
    * @param {String} html - HTML text
-   * @param {String} filePath - file path location
    *
-   * @return {undefined}
+   * @return {Promise} PDF Buffer
    */
-  async makePDF(service, html, filePath) {
+  async makePDF(service, html) {
     if (!service) {
       const err = new Error(
         'Provide a headless browser. For example: "https://github.com/GoogleChrome/puppeteer".'
@@ -27,14 +26,6 @@ module.exports = {
       throw err;
     }
 
-    if (!filePath) {
-      const err = new Error(
-        'Provide a file path to store the PDF. For example "file.pdf".'
-      );
-
-      throw err;
-    }
-
     const browser = await service.launch();
     const page = await browser.newPage();
 
@@ -42,11 +33,12 @@ module.exports = {
     await page.setContent(html);
 
     // https://github.com/GoogleChrome/puppeteer/blob/v1.11.0/docs/api.md#pagepdfoptions
-    await page.pdf({
-      path: filePath,
+    const buff = await page.pdf({
       format: 'A4'
     });
 
     await browser.close();
+
+    return buff;
   }
 };

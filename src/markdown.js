@@ -5,11 +5,11 @@ module.exports = {
    * Makes HTML from Markdown text.
    *
    * @param {Object} service - Markdown converting service
-   * @param {String} markdown - Markdown text
+   * @param {String} mdTxt - Markdown text
    *
-   * @return {Promise} HTML
+   * @return {Promise} HTML String
    */
-  async makeHTML(service, markdown) {
+  async makeHTML(service, mdTxt) {
     if (!service) {
       const err = new Error(
         'Provide a Markdown converting service. For example: "https://github.com/showdownjs/showdown".'
@@ -18,7 +18,7 @@ module.exports = {
       throw err;
     }
 
-    if (!markdown) {
+    if (!mdTxt) {
       const err = new Error(
         'Provide some Markdown text. For example "# Hello World!".'
       );
@@ -26,8 +26,6 @@ module.exports = {
       throw err;
     }
 
-    const html = service.makeHtml(markdown);
-
-    return html;
+    return service.makeHtml(mdTxt);
   }
 };

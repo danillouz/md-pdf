@@ -1,8 +1,8 @@
 'use strict';
 
-const md = require('./md');
+const markdown = require('./markdown');
 
-test('makeHTML(service, markdown) throws without service', async () => {
+test('makeHTML(service, mdTxt) throws without service', async () => {
   expect.assertions(1);
 
   const want = new Error(
@@ -10,37 +10,39 @@ test('makeHTML(service, markdown) throws without service', async () => {
   );
 
   try {
-    await md.makeHTML();
+    await markdown.makeHTML();
   } catch (err) {
     expect(err).toEqual(want);
   }
 });
 
-test('makeHTML(service, markdown) throws without markdown', async () => {
+test('makeHTML(service, mdTxt) throws without mdTxt', async () => {
   expect.assertions(1);
 
-  const service = {};
   const want = new Error(
     'Provide some Markdown text. For example "# Hello World!".'
   );
 
+  const service = {};
+
   try {
-    await md.makeHTML(service);
+    await markdown.makeHTML(service);
   } catch (err) {
     expect(err).toEqual(want);
   }
 });
 
-test('makeHTML(service, markdown) resolves with HTML', async () => {
+test('makeHTML(service, mdTxt) resolves with HTML String', async () => {
   expect.assertions(1);
 
   const want = '<h1>Hello World!</h1>';
+
   const service = {
     makeHtml: () => want
   };
 
-  const markdown = '# Hello World!';
-  const got = await md.makeHTML(service, markdown);
+  const mdTxt = '# Hello World!';
+  const got = await markdown.makeHTML(service, mdTxt);
 
   expect(got).toEqual(want);
 });

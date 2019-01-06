@@ -7,7 +7,7 @@ module.exports = {
    * @param {Object} service - Headless browser
    * @param {String} html - HTML text
    *
-   * @return {Promise} PDF Buffer
+   * @return {Promise} PDF Buffer or Error
    */
   async makePDF(service, html) {
     if (!service) {

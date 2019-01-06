@@ -1,6 +1,6 @@
 # MD -> PDF
 
-Experimenting 🧪 with generating PDF files 📄 from Markdown text.
+Generate a PDF Buffer from Markdown text.
 
 ## Input/Output Example
 
@@ -49,3 +49,31 @@ _This is **more** text._
 Generates the following PDF:
 
 ![PDF Output Example](./example.pdf)
+
+## API
+
+### createPDF(mdTxt)
+
+Creates a PDF Buffer from some Markdown text.
+
+#### Arguments
+
+| Name     | Type     | Required | Description   |
+| -------- | -------- | -------- | ------------- |
+| `mdText` | `String` | Yes      | Mardown text. |
+
+#### Returns
+
+`Promise` which resolves with a `Buffer` or rejects with an `Error`.
+
+#### Usage
+
+```js
+createPDF('# Hi')
+  .then(buff => console.log(buff))
+  .catch(err => console.error(err));
+```
+
+## Examples
+
+- [Save to file](./examples/save-to-file.js)

@@ -7,7 +7,7 @@ module.exports = {
    * @param {Object} service - Markdown converting service
    * @param {String} mdTxt - Markdown text
    *
-   * @return {Promise} HTML String
+   * @return {Promise} HTML String or Error
    */
   async makeHTML(service, mdTxt) {
     if (!service) {

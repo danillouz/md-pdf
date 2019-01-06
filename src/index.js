@@ -11,7 +11,7 @@ const headless = require('./headless');
  *
  * @param {String} mdTxt - Markdown text
  *
- * @return {Promise} PDF Buffer
+ * @return {Promise} PDF Buffer or Error
  */
 module.exports = async function createPDF(mdTxt) {
   const mdConverter = new showdown.Converter({

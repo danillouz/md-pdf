@@ -1,7 +1,7 @@
 {
   "name": "md-pdf",
   "version": "1.0.0",
-  "description": "Experimenting with generating PDF files from Markdown text",
+  "description": "Generate a PDF Buffer from Markdown text",
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
